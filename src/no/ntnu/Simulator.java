@@ -173,11 +173,39 @@ public class Simulator
      */
     private void delay(int millisec)
     {
-        try {
+        try 
+        {
             Thread.sleep(millisec);
         }
-        catch (InterruptedException ie) {
+        catch (InterruptedException ie) 
+        {
             // wake up
         }
+    }
+    
+    /**
+     * Removes any dead animals from the rabbits and foxes lists.
+     */
+    private void removeDeadAnimals()
+    {
+        for (Iterator<Fox> foxIt = foxes.iterator(); foxIt.hasNext();)
+        {
+            Fox fox = foxIt.next();
+            if (!fox.isAlive())
+            {
+                foxIt.remove();
+            }
+        }
+
+        for (Iterator<Rabbit> rabbitIt = rabbits.iterator(); rabbitIt.hasNext();)
+        {
+            Rabbit rabbit = rabbitIt.next();
+            if (!rabbit.isAlive())
+            {
+                rabbitIt.remove();
+            }
+        }
+        
+        
     }
 }
