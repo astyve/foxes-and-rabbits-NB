@@ -144,7 +144,7 @@ public class Fox
     private void incrementHunger()
     {
         foodLevel--;
-        if(foodLevel <= 0) {
+        if (foodLevel <= 0) {
             setDead();
         }
     }
@@ -156,21 +156,22 @@ public class Fox
      */
     private Location findFood()
     {
+        Location newLocation = null;
         List<Location> adjacent = field.adjacentLocations(location);
         Iterator<Location> it = adjacent.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
+            if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+                if (rabbit.isAlive()) { 
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
-                    return where;
+                    foodLevel += RABBIT_FOOD_VALUE;
+                    newLocation = where;
                 }
             }
         }
-        return null;
+        return newLocation;
     }
     
     /**
