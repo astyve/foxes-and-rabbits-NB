@@ -189,4 +189,10 @@ public class Fox extends Animal
         return age >= BREEDING_AGE;
     }
 
+    @Override
+    protected int getBreedingAge()
+    {
+        return BREEDING_AGE;
+    }
+
 }

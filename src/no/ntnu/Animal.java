@@ -20,6 +20,8 @@ public abstract class Animal
     private Location location;
     // The field occupied.
     private Field field;
+    // The animal's age.
+    private int age;    
 
     public Animal(Field field, Location location)
     {
@@ -84,6 +86,21 @@ public abstract class Animal
         return this.field;
     }
     
+    /**
+     * A fox can breed if it has reached the breeding age.
+     */
+    protected boolean canBreed()
+    {
+        return age >= getBreedingAge();
+    }    
+    
+    protected int getAge()
+    {
+        return this.age;
+    }
+    
     public abstract void act( List<Animal> newAnimals);
+    
+    protected abstract int getBreedingAge();
     
 }
