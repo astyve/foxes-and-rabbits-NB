@@ -5,11 +5,13 @@
  */
 package no.ntnu;
 
+import java.util.List;
+
 /**
  *
  * @author arne
  */
-public class Animal
+public abstract class Animal
 {
     
     // Whether the animal is alive or not.
@@ -81,5 +83,7 @@ public class Animal
     {
         return this.field;
     }
+    
+    public abstract void act( List<Animal> newAnimals);
     
 }
