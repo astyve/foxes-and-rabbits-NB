@@ -5,11 +5,13 @@
  */
 package no.ntnu;
 
+import java.util.List;
+
 /**
  *
  * @author asty
  */
-public class Animal
+public abstract class Animal
 {
     
     // Whether the rabbit is alive or not.
@@ -76,5 +78,7 @@ public class Animal
         location = newLocation;
         field.place(this, newLocation);
     }
+    
+   public abstract void act(List<Animal> newKids);
     
 }

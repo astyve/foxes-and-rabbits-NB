@@ -26,8 +26,9 @@ public class Simulator
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
 
     // Lists of animals in the field.
-    private List<Rabbit> rabbits;
-    private List<Fox> foxes;
+    //private List<Rabbit> rabbits; //TODO - delete
+    //private List<Fox> foxes;
+    private List<Animal> animals;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -57,8 +58,11 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
-        rabbits = new ArrayList<>();
-        foxes = new ArrayList<>();
+        //rabbits = new ArrayList<>();
+        //foxes = new ArrayList<>();
+        this.animals = new ArrayList<>();
+        
+        
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
@@ -101,30 +105,20 @@ public class Simulator
         step++;
 
         // Provide space for newborn rabbits.
-        List<Rabbit> newRabbits = new ArrayList<>();        
+        List<Animal> newAnimalKids = new ArrayList<>();        
         // Let all rabbits act.
-        for(Iterator<Rabbit> it = rabbits.iterator(); it.hasNext(); ) {
-            Rabbit rabbit = it.next();
-            rabbit.run(newRabbits);
-            if(! rabbit.isAlive()) {
+        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
+            Animal animal = it.next();
+            animal.act(newAnimalKids);
+            if(! animal.isAlive()) {
                 it.remove();
             }
         }
         
-        // Provide space for newborn foxes.
-        List<Fox> newFoxes = new ArrayList<>();        
-        // Let all foxes act.
-        for(Iterator<Fox> it = foxes.iterator(); it.hasNext(); ) {
-            Fox fox = it.next();
-            fox.hunt(newFoxes);
-            if(! fox.isAlive()) {
-                it.remove();
-            }
-        }
         
-        // Add the newly born foxes and rabbits to the main lists.
-        rabbits.addAll(newRabbits);
-        foxes.addAll(newFoxes);
+        // Add the newly born animals to the main lists.
+        
+        this.animals.addAll(newAnimalKids);
 
         view.showStatus(step, field);
     }
@@ -135,8 +129,7 @@ public class Simulator
     public void reset()
     {
         step = 0;
-        rabbits.clear();
-        foxes.clear();
+        this.animals.clear();
         populate();
         
         // Show the starting state in the view.
@@ -155,12 +148,12 @@ public class Simulator
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
-                    foxes.add(fox);
+                    this.animals.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
-                    rabbits.add(rabbit);
+                    this.animals.add(rabbit);
                 }
                 // else leave the location empty.
             }
