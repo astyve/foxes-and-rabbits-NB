@@ -33,9 +33,9 @@ public class FoxTest
     public void testHunt()
     {
         System.out.println("hunt");
-        List<Fox> newFoxes = null;
+        List<Animal> newFoxes = null;
         Fox instance = null;
-        instance.hunt(newFoxes);
+        instance.act(newFoxes);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
