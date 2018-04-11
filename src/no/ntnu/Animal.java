@@ -6,6 +6,7 @@
 package no.ntnu;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,12 +21,15 @@ public abstract class Animal
     private Location location;
     // The field occupied.
     private Field field;   
+    
+    private static final Logger log = Logger.getLogger(Animal.class.getName());
 
     public Animal(Field field, Location location)
     {
-        this.location = location;
+        //this.location = location;
         this.field = field;
         this.alive = true;
+        setLocation(location);
     }
     
     
@@ -70,13 +74,14 @@ public abstract class Animal
      * Place the rabbit at the new location in the given field.
      * @param newLocation The rabbit's new location.
      */
-    protected void setLocation(Location newLocation)
+    protected final void setLocation(Location newLocation)
     {
         if(location != null) {
             field.clear(location);
         }
         location = newLocation;
         field.place(this, newLocation);
+        log.info("Location set to " + this.location.toString());
     }
     
    public abstract void act(List<Animal> newKids);
